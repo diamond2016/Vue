@@ -1,0 +1,3 @@
+export default {
+  '*.{vue,ts,js}': ['eslint --fix', 'prettier --write'],
+}
