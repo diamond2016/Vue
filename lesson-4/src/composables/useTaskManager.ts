@@ -33,6 +33,9 @@ export function useTaskManager() {
    */
   const addTask = (formData: TaskFormData) => {
     // TODO: Implement task creation logic (assign ID, timestamps, push to tasks.value)
+    const task: Task = {
+      
+    }
   }
 
   /**

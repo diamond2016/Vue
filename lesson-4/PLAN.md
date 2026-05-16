@@ -592,11 +592,18 @@ export default defineConfig({ test: { environment: 'jsdom' } })
 This plan follows lesson-3's established patterns (router setup, ESLint, Prettier, Vitest with jsdom) and extends them with the composables architecture that lesson-4's learning objectives require. Ready to proceed with implementation on your go.
 
 ## Notes about implementation
-Phase 3 - useTaskManage composable.
+### Phase 3 - useTaskManage composable.
+includes:
+ - State: tasks, filter, isLoading, error (all strongly typed)
+ - Computed: filteredTasks (with placeholder for filtering logic)
+ - Methods: fetchTasks, addTask, updateTask, deleteTask, toggleTask stubs
+ - Lifecycle: onMounted hook to call fetchTasks
+ - Return: clean object with state and methods
 
-Sceheleton includes:                                                                                                                                                                                                                               
- 1. State: tasks, filter, isLoading, error (all strongly typed).                                                                                                                                                                            
- 2. Computed: filteredTasks (with a placeholder for the filtering logic).                                                                                                                                                                   
- 3. Methods: Stubs for fetchTasks, addTask, updateTask, deleteTask, and toggleTask.                                                                                                                                                         
- 4. Lifecycle: onMounted hook to call fetchTasks immediately.                                                                                                                                                                               
- 5. Return: A clean object containing all the state and methods.        
+### Phase 3 Persistence: useLocalStorage
+
+In a standard web browser (the typical Vue use case), direct file system access is restricted for security reasons.
+
+- **Best Practice**: Use the browser's built-in `localStorage` API. It's the simplest, most idiomatic, and most performant way to achieve "local persistence" in a web application.
+- **When to use SQLite/Files**: Only use a database like SQLite or file system access if building a desktop application with Electron, or if building a backend API.
+**Recommendation**: For a `useLocalStorage` composable in a standard Vue frontend, use `localStorage`.
