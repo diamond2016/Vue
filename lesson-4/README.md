@@ -12,7 +12,7 @@ A comprehensive project demonstrating Vue's Composition API advanced features:
 
 ## Project Overview
 
-A **Task Manager** application that combines all previous lessons with advanced Composition API patterns. Users can create, edit, and delete tasks with form validation, async operations, and keyboard shortcuts.
+A **Task Manager** application that combines all previous lessons with advanced Composition API patterns. The application flow starts at `App.vue` -> `HomeView.vue`. From `HomeView.vue`, clicking the "get started" link navigates to the `TaskManager.vue` view (which is currently a TODO). Users can create, edit, and delete tasks with form validation, async operations, and keyboard shortcuts.
 
 ## Learning Objectives
 
@@ -189,11 +189,17 @@ lesson-4/
 │                      App.vue (Root)                          │
 │  - Provides global state                                     │
 │  - Manages router                                           │
-│  - Calls composables                                        │
+│  - Renders HomeView.vue by default                         │
 └─────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                  TaskManager.vue (Main View)                 │
+│                  HomeView.vue (Landing Page)                │
+│  - Displays initial welcome/info page                      │
+│  - Contains "Get Started" link that routes to TaskManager.vue│
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│              TaskManager.vue (Main View)                   │
 │  - Composes multiple composables                             │
 │  - Manages form state                                       │
 │  - Handles keyboard events                                  │

@@ -590,3 +590,13 @@ export default defineConfig({ test: { environment: 'jsdom' } })
 | 10 | `npm install && npm run dev` smoke test + `npm run test:unit` + `npm run lint` | Verify everything works |
 
 This plan follows lesson-3's established patterns (router setup, ESLint, Prettier, Vitest with jsdom) and extends them with the composables architecture that lesson-4's learning objectives require. Ready to proceed with implementation on your go.
+
+## Notes about implementation
+Phase 3 - useTaskManage composable.
+
+Sceheleton includes:                                                                                                                                                                                                                               
+ 1. State: tasks, filter, isLoading, error (all strongly typed).                                                                                                                                                                            
+ 2. Computed: filteredTasks (with a placeholder for the filtering logic).                                                                                                                                                                   
+ 3. Methods: Stubs for fetchTasks, addTask, updateTask, deleteTask, and toggleTask.                                                                                                                                                         
+ 4. Lifecycle: onMounted hook to call fetchTasks immediately.                                                                                                                                                                               
+ 5. Return: A clean object containing all the state and methods.        
