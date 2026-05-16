@@ -31,16 +31,29 @@ export function useTaskManager() {
   /**
    * Fetches initial task data (simulates API call).
    */
-  const fetchTasks = async () => {
-    // TODO: Implement loading state, API simulation, and error handling
-  }
+  const fetchTasks = async () => {                                                                                                                                                                                                          
+    // Simulate API fetch, but if tasks.value is already populated from localStorage,                                                                                                                                                    
+    // you might skip this or merge the data.                                                                                                                                                                                            
+    await new Promise(resolve => setTimeout(resolve, 1000))                                                                                                                                                                              
+    isLoading.value = false                                                                                                                                                                                                              
+    } 
 
   /**
    * Adds a new task to the list.
    * @param formData - The data for the new task.
    */
-  const addTask = (formData: TaskFormData) => {
-    // TODO: Implement task creation logic (assign ID, timestamps, push to tasks.value)
+  const addTask = (formData: TaskFormData) => {                                                                                                                                                                                  
+    // When you modify tasks.value, the useLocalStorage watcher automatically saves it!                                                                                                                                                  
+    const newTask: Task = {                                                                                                                                                                                                              
+      id: Date.now(),                                                                                                                                                                                                                    
+      title: formData.title,                                                                                                                                                                                                             
+      description: formData.description,
+      priority: formData.priority,                                                                                                                                                                                                              
+      completed: false,                                                                                                                                                                                                                  
+      createdAt: new Date().toISOString(),                                                                                                                                                                                               
+      updatedAt: new Date().toISOString(),                                                                                                                                                                                               
+    }                                                                                                                                                                                                                                    
+    tasks.value = [...tasks.value, newTask]  
   }
 
   /**
@@ -57,7 +70,8 @@ export function useTaskManager() {
    * @param id - The ID of the task to delete.
    */
   const deleteTask = (id: number) => {
-    // TODO: Implement task deletion logic (filter out the task)
+    // modifying tasks.value triggers the save                                                                                                                                                                                    
+    tasks.value = tasks.value.filter(task => task.id !== id)  
   }
 
   /**
@@ -76,11 +90,10 @@ export function useTaskManager() {
   // --- RETURN VALUES ---
   return {
     tasks,
+    filteredTasks,
     filter,
     isLoading,
     error,
-    filteredTasks,
-    fetchTasks,
     addTask,
     updateTask,
     deleteTask,
