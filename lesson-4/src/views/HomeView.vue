@@ -2,13 +2,14 @@
   <div class="home-container">
     <h1>Welcome to Task Manager</h1>
     <p class="subtitle">Your personal task management application</p>
+
     <router-link to="/tasks" class="cta-button">
       Get Started
     </router-link>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 </script>
 
 <style scoped>
@@ -47,9 +48,7 @@ h1 {
 .cta-button:hover {
   background-color: #369970;
 }
-</style>
 
-<style scoped>
 .app {
   padding: 10px;
 }

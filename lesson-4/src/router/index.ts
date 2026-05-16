@@ -1,15 +1,16 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
-const routes = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'tasks',
-    component: () => import('@/views/TaskManager.vue'),
+    name: 'home',
+    component: () => import('@/views/HomeView.vue'),
   },
   {
-    path: '/:pathMatch(.*)*',
-    redirect: '/',
-  },
+    path: '/tasks',
+    name: 'tasks',
+    component: () => import('@/views/TaskManager.vue'),
+  }
 ]
 
 export const router = createRouter({

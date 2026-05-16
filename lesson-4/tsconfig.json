@@ -1,16 +1,15 @@
 {
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "paths": {
+      "@/*": ["./src/*"] // Maps all paths starting with @/ to the src directory
+    }
+},
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" },
     { "path": "./tsconfig.vitest.json" }
-  ],
-  "compilerOptions": {
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"]
-    }
-  }
+  ]
 }
