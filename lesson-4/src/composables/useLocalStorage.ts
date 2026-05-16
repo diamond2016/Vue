@@ -13,9 +13,13 @@ export function useLocalStorage<T>(key: string, initialValue: T): Ref<T> {
   const storedValue = localStorage.getItem(key);
   
   // Determine the initial value: parse from storage or use the provided default
-  const value = ref<T>(
-    storedValue ? JSON.parse(storedValue) as T : initialValue
-  );
+  let initialValueFromStorage: T;
+  if (storedValue) {
+    initialValueFromStorage = JSON.parse(storedValue) as T;
+  } else {
+    initialValueFromStorage = initialValue;
+  }
+  const value = ref(initialValueFromStorage) as Ref<T>;
 
   // 2. Watch the ref and update localStorage whenever the value changes
   watch(value, (newValue) => {
