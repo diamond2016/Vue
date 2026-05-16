@@ -1,13 +1,21 @@
 import { ref, computed, onMounted } from 'vue'
 import type { Task, TaskFormData } from '@/types/task'
+import { useLocalStorage } from './useLocalStorage'
+
+const TASK_STORAGE_KEY = 'task_manager_tasks'
 
 /**
  * @description Manages all task-related state, logic, and data fetching.
  * @returns {object} An object containing reactive state and methods.
  */
 export function useTaskManager() {
+  // Instantiate useLocalStorage                                                                                                                                                                                                      
+  //    - <Task[]>: Specifies the type of data (an array of Task objects)                                                                                                                                                                
+  //    - TASK_STORAGE_KEY: The string key used in localStorage                                                                                                                                                                          
+  //    - []: The initial value (an empty array of Tasks)                                                                                                                                                                                
+  const tasks = useLocalStorage<Task[]>(TASK_STORAGE_KEY, [])
+  
   // --- STATE ---
-  const tasks = ref<Task[]>([])
   const filter = ref<'all' | 'active' | 'completed'>('all')
   const isLoading = ref(false)
   const error = ref<string | null>(null)
@@ -33,9 +41,6 @@ export function useTaskManager() {
    */
   const addTask = (formData: TaskFormData) => {
     // TODO: Implement task creation logic (assign ID, timestamps, push to tasks.value)
-    const task: Task = {
-      
-    }
   }
 
   /**

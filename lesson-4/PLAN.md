@@ -607,3 +607,5 @@ In a standard web browser (the typical Vue use case), direct file system access 
 - **Best Practice**: Use the browser's built-in `localStorage` API. It's the simplest, most idiomatic, and most performant way to achieve "local persistence" in a web application.
 - **When to use SQLite/Files**: Only use a database like SQLite or file system access if building a desktop application with Electron, or if building a backend API.
 **Recommendation**: For a `useLocalStorage` composable in a standard Vue frontend, use `localStorage`.
+ The localStorage API is a web storage mechanism provided by modern web browsers. It allows web applications to store key-value pairs locally on the user's machine, persisting data even after the browser window is closed and reopened. 
+ 
