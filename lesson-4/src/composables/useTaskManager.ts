@@ -22,7 +22,15 @@ export function useTaskManager() {
 
   // --- COMPUTED PROPERTIES ---
   const filteredTasks = computed(() => {
-    // TODO: Implement filtering logic based on 'filter.value'
+    if (filter.value === 'all') {
+      return tasks.value
+    }
+    if (filter.value === 'active') {
+      return tasks.value.filter(task => !task.completed)
+    }
+    if (filter.value === 'completed') {
+      return tasks.value.filter(task => task.completed)
+    }
     return tasks.value
   })
 
@@ -32,11 +40,50 @@ export function useTaskManager() {
    * Fetches initial task data (simulates API call).
    */
   const fetchTasks = async () => {                                                                                                                                                                                                          
-    // Simulate API fetch, but if tasks.value is already populated from localStorage,                                                                                                                                                    
-    // you might skip this or merge the data.                                                                                                                                                                                            
-    await new Promise(resolve => setTimeout(resolve, 1000))                                                                                                                                                                              
-    isLoading.value = false                                                                                                                                                                                                              
-    } 
+    isLoading.value = true
+    try {
+      // Simulate API fetch delay
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Simulate data received from a remote API
+      const mockTasks: Task[] = [
+        {
+          id: 1,
+          title: 'Design UI Mockups',
+          description: 'Create high-fidelity mockups for the task manager.',
+          priority: 'High',
+          completed: true,
+          createdAt: new Date(Date.now() - 86400000).toISOString(),
+          updatedAt: new Date(Date.now() - 86400000).toISOString(),
+        },
+        {
+          id: 2,
+          title: 'Implement Task Logic',
+          description: 'Finish the CRUD operations in useTaskManager.',
+          priority: 'High',
+          completed: false,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+        {
+          id: 3,
+          title: 'Write Documentation',
+          description: 'Document the composables and API usage.',
+          priority: 'Medium',
+          completed: false,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+      ]
+      
+      // Overwrite local storage data with fresh data from the API
+      tasks.value = mockTasks
+    } catch (e) {
+      error.value = 'Failed to fetch tasks from API.'
+    } finally {
+      isLoading.value = false
+    }
+  }
 
   /**
    * Adds a new task to the list.
@@ -62,7 +109,11 @@ export function useTaskManager() {
    * @param formData - The new data for the task.
    */
   const updateTask = (id: number, formData: TaskFormData) => {
-    // TODO: Implement task update logic (find and replace in tasks.value)
+    tasks.value = tasks.value.map(task => 
+      task.id === id 
+        ? { ...task, ...formData, updatedAt: new Date().toISOString() } 
+        : task
+    )
   }
 
   /**
@@ -79,7 +130,11 @@ export function useTaskManager() {
    * @param id - The ID of the task to toggle.
    */
   const toggleTask = (id: number) => {
-    // TODO: Implement task toggle logic
+    tasks.value = tasks.value.map(task => 
+      task.id === id 
+        ? { ...task, completed: !task.completed, updatedAt: new Date().toISOString() } 
+        : task
+    )
   }
 
   // --- LIFECYCLE HOOKS ---
